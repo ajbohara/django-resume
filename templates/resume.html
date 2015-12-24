@@ -169,7 +169,7 @@
 
             <div id="ft">
                 <p>{{ profile.user.first_name }}&nbsp;{{ profile.user.last_name }} &mdash; <a
-                        href="{% url 'resume' %}">{{ request.get_full_path }}</a> &mdash;{{ profile.phone }}
+                        href="{% url 'resume' %}">{{request.get_host}}</a> &mdash;{{ profile.phone }}
                 </p>
             </div>
             <!--// footer -->
