@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+
+    <title>{{ profile.user.first_name }}&nbsp;{{ profile.user.last_name }} | {{ profile.profession }}
+        | {{ profile.user.email }}</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+
+
+    <link rel="stylesheet" type="text/css"
+          href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" media="all"/>
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext' rel='stylesheet'
+          type='text/css'>
+
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/resume.css' %}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/print.css' %}" media="print"/>
+
+
+    <!-- Icons CDN Link -->
+    <script src="https://use.fonticons.com/4e904c10.js"></script>
+
+
+</head>
+<body>
+
+<div id="doc2" class="yui-t7">
+    <div id="inner">
+        <div id="hd">
+            <div class="yui-gc">
+                <div class="yui-u first">
+                    <h1>{{ profile.user.first_name }}&nbsp;{{ profile.user.last_name }}</h1>
+
+                    <h2>{{ profile.profession }}</h2>
+                </div>
+
+                <div class="yui-u">
+                    <div class="contact-info">
+                        <h3><a href="mailto:{{ profile.user.email }}" style="text-decoration:none"><i
+                                class="icon icon-envelope"></i> {{ profile.user.email }}</a></h3>
+
+                        <h3><i class="icon icon-phone"></i> {{ profile.phone }}</h3>
+                        <h5><i class="icon icon-home"></i>
+                            {{ profile.address.street }}<br/>
+                            {{ profile.address.city }}, {{ profile.address.state }} | {{ profile.address.postal }}
+                        </h5>
+                        <a class="print-link" href="{{ profile.github }}" target="_blank"><i
+                                class="icon icon-github icon-2x no-print"></i></a>
+                        &nbsp;
+                        <a class="print-link" href="{{ profile.linkedin }}" target="_blank"><i
+                                class="icon icon-linkedin icon-2x no-print"></i></a>
+                        &nbsp;
+                        <a href="javascript:if(window.print)window.print()" value="Print this page"><i
+                                class="icon icon-print icon-2x no-print"></i></a>
+
+                    </div>
+                    <!--// .contact-info -->
+                </div>
+            </div>
+            <!--// .yui-gc -->
+        </div>
+        <!--// hd -->
+
+        <div id="bd">
+            <div id="yui-main">
+                <div class="yui-b">
+                    <div class="yui-gf">
+                        <div class="yui-u first">
+                            <h2>Skills</h2>
+                        </div>
+                        <div class="yui-u">
+                            {% for skill in profile.skill.all %}
+                                <div class="talent">
+                                    <h2>{{ skill.name }}</h2>
+
+                                    <p>{{ skill.description }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!--// .yui-gf -->
+
+                    <div class="yui-gf">
+
+                        <div class="yui-u first">
+                            <h2>Relevant Experience</h2>
+                        </div>
+                        <!--// .yui-u -->
+
+                        <div class="yui-u">
+                            {% for experience in profile.experiences.all %}
+                                <div class="job {% if forloop.last %}last{% endif %}">
+                                    <h2>{{ experience.company.name }}</h2>
+
+                                    <h3>{{ experience.role }}</h3>
+                                    <h4>{{ experience.start_date|date:"N Y" }} - {% if experience.present %}
+                                        Present{% else %}{{ experience.end_date|date:"N Y" }}{% endif %}</h4>
+
+                                    <p>{{ experience.job_duty }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <!--// .yui-u -->
+                    </div>
+                    <!--// .yui-gf -->
+
+                    <div class="yui-gf">
+
+                        <div class="yui-u first">
+                            <h2>Academic Projects</h2>
+                        </div>
+                        <!--// .yui-u -->
+
+                        <div class="yui-u">
+                            {% for project in profile.projects.all %}
+                                <div class="job {% if forloop.last %}last{% endif %}">
+                                    <h2>{{ project.name }}</h2>
+
+                                    <p>{{ project.description }}</p>
+                                </div>
+                            {% endfor %}
+
+
+                        </div>
+                        <!--// .yui-u -->
+                    </div>
+                    <!--// .yui-gf -->
+
+
+                    <div class="yui-gf last">
+                        <div class="yui-u first">
+                            <h2>Education</h2>
+                        </div>
+
+                        <div class="yui-u">
+                            {% for education in profile.education.all %}
+                                <div class="job {% if forloop.last %}last{% endif %}">
+                                    <h2>{{ education.school }}
+                                    </h2>
+
+                                    <h3>{{ education.school.city }}, {{ education.school.country }}</h3>
+                                    {% if education.major %}
+                                        <h5>{{ education.type }} &mdash; {{ education.major }} {% if education.minor %}
+                                            ({{ education.minor }} Minor)
+                                        {% endif %}</h5>{% endif %}
+                                    <h4>{{ education.start_date|date:'N Y' }} &mdash; {{ education.end_date|date:'N Y' }}
+                                        {% if education.present %}<strong><i>(Expected)</i></strong>  {% endif %}</h4>
+
+
+
+
+                                    {% if education.relevant_courses %}
+                                        <h5>Relevant Courses &mdash; {{ education.relevant_courses }}</h5>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                            <p><br>
+                        </div>
+                        <!--// .yui-gf -->
+                    </div>
+                    <!--// .yui-b -->
+                </div>
+                <!--// yui-main -->
+            </div>
+            <!--// bd -->
+
+            <div id="ft">
+                <p>{{ profile.user.first_name }}&nbsp;{{ profile.user.last_name }} &mdash; <a
+                        href="{% url 'resume' %}">{{ request.get_full_path }}</a> &mdash;{{ profile.phone }}
+                </p>
+            </div>
+            <!--// footer -->
+
+        </div>
+        <!-- // inner -->
+
+
+    </div>
+    <!--// doc -->
+
+
+</body>
+</html>
+
