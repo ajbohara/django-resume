@@ -14,4 +14,4 @@ from dj_static import Cling
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_resume.settings")
 
-application = Cling(get_wsgi_application())
+application = get_wsgi_application()
