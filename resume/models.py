@@ -101,4 +101,4 @@ class UserProfile(models.Model):
 	github = models.CharField('GitHub', max_length=40)
 
 	def __str__(self):
-		return self.user.username + ' profile'
+		return self.user.first_name + ' profile'

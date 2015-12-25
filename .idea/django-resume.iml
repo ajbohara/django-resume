@@ -20,6 +20,7 @@
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/templates" />
+        <option value="$MODULE_DIR$/resume/templates" />
       </list>
     </option>
   </component>

@@ -13,11 +13,9 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
-from django.contrib import admin
-from resume.views import Resume
+from django.conf.urls import url
+from .views import Resume
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', include('resume.urls', namespace='resume')),
+    url(r'^$', Resume.as_view(), name='resume'),
 ]
