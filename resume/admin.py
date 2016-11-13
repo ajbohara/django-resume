@@ -1,12 +1,15 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import School, Company, Education, Experience, UserProfile, Address, Skill, SchoolProject
+from .models import School, Company, Education,\
+	Experience, UserProfile, Address, \
+	Skill, SchoolProject, Objective
 
 
 admin.site.register(School, list_display=['name'])
 admin.site.register(Company)
 admin.site.register(Education)
+admin.site.register(Objective)
 admin.site.register(Experience)
 admin.site.register(UserProfile)
 admin.site.register(Address)

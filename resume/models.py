@@ -17,6 +17,7 @@ class Address(models.Model):
 		return self.city + ', ' + self.country
 
 
+
 class Company(models.Model):
 	name = models.CharField('Company Name', max_length=30) # Company Name
 
@@ -45,7 +46,7 @@ class Education(models.Model):
 	relevant_courses = models.TextField('Relevant Course Work', blank=True)
 	major = models.TextField('Major', blank=True)
 	minor = models.TextField('Minor', blank=True)
-	type = models.CharField('Type', max_length=5) # Bachelors/Masters/Doctorate
+	type = models.CharField('Type', max_length=30) # Bachelors/Masters/Doctorate
 	present = models.BooleanField('Present') # Am I Currently at this School?
 
 	class Meta:
@@ -83,9 +84,16 @@ class Skill(models.Model):
 class SchoolProject(models.Model):
 	name = models.CharField('Project Name', max_length=30)
 	description = models.TextField('Project Description')
+	date = models.DateField('Date Completed')
 
 	def __str__(self):
 		return self.name
+
+class Objective(models.Model):
+	objective = models.TextField('Description')
+
+	def __str__(self):
+		return 'Objective'
 
 
 class UserProfile(models.Model):
@@ -95,6 +103,7 @@ class UserProfile(models.Model):
 	address = models.ForeignKey(Address, default='')
 	skill = models.ManyToManyField(Skill)
 	experiences = models.ManyToManyField(Experience)
+	objective = models.ManyToManyField(Objective)
 	education = models.ManyToManyField(Education)
 	projects = models.ManyToManyField(SchoolProject)
 	linkedin = models.CharField('LinkedIn', max_length=80)

@@ -12,10 +12,7 @@
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css"
           href="{% static 'css/reset-fonts-grids.css' %}" media="all"/>
-    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext' rel='stylesheet'
-          type='text/css'>
-
-
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/screen.css' %}" media="screen"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/print.css' %}" media="print"/>
 
@@ -67,70 +64,7 @@
         <div id="bd">
             <div id="yui-main">
                 <div class="yui-b">
-                    <div class="yui-gf">
-                        <div class="yui-u first">
-                            <h2>Skills</h2>
-                        </div>
-                        <div class="yui-u">
-                            {% for skill in profile.skill.all %}
-                                <div class="talent">
-                                    <h2>{{ skill.name }}</h2>
-
-                                    <p>{{ skill.description }}</p>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <!--// .yui-gf -->
-
-                    <div class="yui-gf">
-
-                        <div class="yui-u first">
-                            <h2>Relevant Experience</h2>
-                        </div>
-                        <!--// .yui-u -->
-
-                        <div class="yui-u">
-                            {% for experience in profile.experiences.all %}
-                                <div class="job {% if forloop.last %}last{% endif %}">
-                                    <h2>{{ experience.company.name }}</h2>
-
-                                    <h3>{{ experience.role }}</h3>
-                                    <h4>{{ experience.start_date|date:"N Y" }} - {% if experience.present %}
-                                        Present{% else %}{{ experience.end_date|date:"N Y" }}{% endif %}</h4>
-
-                                    <p>{{ experience.job_duty }}</p>
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <!--// .yui-u -->
-                    </div>
-                    <!--// .yui-gf -->
-
-                    <div class="yui-gf">
-
-                        <div class="yui-u first">
-                            <h2>Academic Projects</h2>
-                        </div>
-                        <!--// .yui-u -->
-
-                        <div class="yui-u">
-                            {% for project in profile.projects.all %}
-                                <div class="job {% if forloop.last %}last{% endif %}">
-                                    <h2>{{ project.name }}</h2>
-
-                                    <p>{{ project.description }}</p>
-                                </div>
-                            {% endfor %}
-
-
-                        </div>
-                        <!--// .yui-u -->
-                    </div>
-                    <!--// .yui-gf -->
-
-
-                    <div class="yui-gf last">
+                <div class="yui-gf">
                         <div class="yui-u first">
                             <h2>Education</h2>
                         </div>
@@ -159,7 +93,83 @@
                             {% endfor %}
                             <p><br>
                         </div>
-                        <!--// .yui-gf -->
+                </div><!--// .yui-gf -->
+                <div class="yui-gf">
+                    <div class="yui-u first">
+                            <h2>Objective</h2>
+                        </div>
+                        <!--// .yui-u -->
+
+                        <div class="yui-u">
+                            {% for objective in profile.objective.all %}
+                                <div class="{% if forloop.last %}last{% endif %}">
+                                    <p>{{ objective.objective }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <!--// .yui-u -->
+                    </div>
+                    <!--// .yui-gf -->
+                    <div class="yui-gf">
+                        <div class="yui-u first">
+                            <h2>Skills</h2>
+                        </div>
+                        <div class="yui-u">
+                            {% for skill in profile.skill.all %}
+                                <div class="talent">
+                                    <h2>{{ skill.name }}</h2>
+
+                                    <p>{{ skill.description }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!--// .yui-gf -->
+                    <div class="yui-gf">
+
+                        <div class="yui-u first">
+                            <h2>Relevant Experience</h2>
+                        </div>
+                        <!--// .yui-u -->
+
+                        <div class="yui-u">
+                            {% for experience in profile.experiences.all %}
+                                <div class="job {% if forloop.last %}last{% endif %}">
+                                    <h2>{{ experience.company.name }}</h2>
+
+                                    <h3>{{ experience.role }}</h3>
+                                    <h4>{{ experience.start_date|date:"N Y" }} - {% if experience.present %}
+                                        Present{% else %}{{ experience.end_date|date:"N Y" }}{% endif %}</h4>
+
+                                    <p>{{ experience.job_duty }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <!--// .yui-u -->
+                    </div>
+                    <!--// .yui-gf -->
+
+                    <div class="yui-gf last">
+
+                        <div class="yui-u first">
+                            <h2>Academic Projects</h2>
+                        </div>
+                        <!--// .yui-u -->
+
+                        <div class="yui-u">
+                            {% for project in profile.projects.all %}
+                                <div class="job {% if forloop.last %}last{% endif %}">
+                                    <h2>{{ project.name }}</h2>
+                                    <h4>{{ project.date|date:"N Y" }}</h4>
+                                    <p>{{ project.description }}</p>
+                                </div>
+                            {% endfor %}
+
+
+                        </div>
+                        <!--// .yui-u -->
+                    </div>
+                    <!--// .yui-gf -->
                     </div>
                     <!--// .yui-b -->
                 </div>
@@ -171,6 +181,8 @@
                 <p>{{ profile.user.first_name }}&nbsp;{{ profile.user.last_name }} &mdash; <a
                         href="{% url 'resume:resume' %}">{{ request.get_host }}</a> &mdash;{{ profile.phone }}
                 </p>
+                </br>
+                <p class = "no-print">Powered by Django</p>
             </div>
             <!--// footer -->
 
@@ -181,7 +193,7 @@
     </div>
     <!--// doc -->
 
-
+</div>
 </body>
 </html>
 

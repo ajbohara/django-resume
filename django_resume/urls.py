@@ -19,5 +19,5 @@ from resume.views import Resume
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', include('resume.urls', namespace='resume')),
+    url(r'^', include('resume.urls', namespace='resume')),
 ]
